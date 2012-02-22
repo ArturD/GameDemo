@@ -1,12 +1,54 @@
+@import url(http://fonts.googleapis.com/css?family=Fondamento:400,400italic&subset=latin,latin-ext)
+
 body,
 html
   margin: 0
   padding: 0
   background: #756359
+  font-family: 'Fondamento', cursive
 
 .game-canvas
   height: 100%
-  background: #756359
+  width: 1280px
+  margin: auto
+  position: relative
+  
+  .location
+    position: absolute
+    top: 20px
+    right: 100px
+  .subs
+    position: absolute
+    top: 520px
+    right: 100px
+    width: 543px
+    height: 209px
+    padding: 35px 50px
+    background: url('text_frame.png')
+    color: #756359
+  .map_link
+    background: url('map.png')
+    width: 105px
+    height: 149px
+    position: absolute
+    top: 50px
+    left: 140px
+    cursor: pointer
+  .equip_link
+    background: url('equip.png')
+    width: 176px
+    height: 116px
+    position: absolute
+    top: 200px
+    left: 100px
+    cursor: pointer
+  .parrot
+    background: url('parrot.png')
+    width: 180px
+    height: 330px
+    position: absolute
+    top: 400px
+    left: 100px
 
 .map-canvas
   height: 100%
