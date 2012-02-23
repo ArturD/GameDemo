@@ -6,6 +6,11 @@ class Location
     for key of params
       if params[key]
         @[key] = params[key]
+    @states ||= {}
+    if params.activeState
+      @activeState = false
+      @state(params.activeState)
+
   defaults: ->
     @miniX = 400
     @miniY = 400
@@ -24,6 +29,15 @@ class Location
       e = @createInactive()
 
     $('.map-canvas').append(e)
+  
+  state: (activeState) ->
+    return @activeState if @activeState == activeState
+    @activeState.disable() if @activeState
+    @activeState = activeState
+    params = @activeState.enable()
+    if params.text
+      @text = params.text
+
 
   select: ->
     e = $('<img>').attr({src: @img})
@@ -31,7 +45,7 @@ class Location
       .html('')
       .append(e)
 
-    $('.subs').text(@text)
+    $('.subs').html(@text)
   
   createInactive: ->
     e = @elements.mini = $('<img class="mini" src="'+@inactiveMini+'">')

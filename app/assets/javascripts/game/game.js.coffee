@@ -6,6 +6,7 @@ class Game
     @ready =>
       @soundSystem.ensure("default")
     @locations = []
+    @actions = {}
 
   ready: (handler)->
     @handlers ||= []
@@ -23,7 +24,17 @@ class Game
   push: (location) ->
     @locations.push(location)
     location.bindGame(@, @locations.length-1)
+
+  pushAction: (name, action) ->
+    @actions[name] = action
+
+  action: (name) ->
+    Logger.error("no such action #{name}") if not @actions[name]
+    @actions[name]()
   
+  state: (location, state) ->
+    @locations[i].state(state)
+
   goto: (i) ->
     @locations[i].select()
     $(window).scrollTo('.game-canvas', 1000)
@@ -37,9 +48,20 @@ $ ->
     mini: '/assets/game/f1mini.png',
     img: '/assets/game/f1.png',
     active: true
-
+    states: {
+      a: {
+        text: 'Gdzie chcesz jechać? <br/><a href="do:f1_w_lewo">W LEWO</a><a href="do:f1_w_prawo">W PRAWO</a>'
+      }
+      b: {
+        text: 'Gdzie teraz? <br/><a href="do:f1_w_lewo">W LEWO</a><a href="do:f1_w_prawo">W PRAWO</a>'
+      }
+    }
   }))
   
+  game.pushAction "f1_w_prawo", =>
+    game.state(0, 'b')
+    
+
   game.push(new Location({
     miniX: 100,
     miniY: 100,
