@@ -5,7 +5,8 @@ html
   margin: 0
   padding: 0
   background: #756359
-  font-family: 'Fondamento', cursive
+  font-family: 'Fondamento'
+  font-size: 17pt
 
 .game-container,
 .map-container
@@ -34,6 +35,7 @@ html
     padding: 35px 50px
     background: url('text_frame.png')
     color: #756359
+    text-align: center
   .map_link
     background: url('map.png')
     width: 105px
@@ -47,7 +49,7 @@ html
     width: 176px
     height: 116px
     position: absolute
-    top: 200px
+    top: 220px
     left: 100px
     cursor: pointer
   .parrot
@@ -55,14 +57,21 @@ html
     width: 180px
     height: 330px
     position: absolute
-    top: 400px
+    top: 420px
     left: 100px
+  a
+    text-decoration: none
+    color: #756359
+    &:hover
+      color: black
+
+.map-container
+  background: #756359 url('bg_map.png')
 
 .map-canvas
   height: 100%
   width: 1280px
   margin: auto
-  background: #756359 url('bg-map.png') center no-repeat
   position: relative
   .mini
     position: absolute

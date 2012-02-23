@@ -5,12 +5,12 @@ class LocationState
     params ||= {}
     @params ||= {}
     for key of params
-      if params[key]
+      if params[key] or params[key] == null
         @params[key] = params[key]
 
   defaults: ->
   
-  enalble: ->
+  enable: ->
     @params
 
   disable: ->

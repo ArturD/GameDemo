@@ -21,34 +21,52 @@ class Location
     @rotation = -15
     @scaleup = 0.1
     @text = "lorem ipsum"
+    @sound = null
 
   bindGame: (@game, @id) ->
+    @activeMiniature = @createActive()
+    @inactiveMiniature = @createInactive()
     if @active
-      e = @createActive()
+      @inactiveMiniature.hide()
     else
-      e = @createInactive()
+      @activeMiniature.hide()
 
-    $('.map-canvas').append(e)
+    $('.map-canvas').append(@activeMiniature)
+    $('.map-canvas').append(@inactiveMiniature)
   
   state: (activeState) ->
     return @activeState if @activeState == activeState
-    @activeState.disable() if @activeState
+    @states[@activeState].disable() if @activeState
+    @disableSound()
     @activeState = activeState
-    params = @activeState.enable()
+    params = @states[@activeState].enable()
     if params.text
       @text = params.text
-
+    if params.img
+      @img = params.img
+    if params.sound or params.sound == null
+      @sound = params.sound
 
   select: ->
     e = $('<img>').attr({src: @img})
+    
     $('.location')
       .html('')
       .append(e)
 
     $('.subs').html(@text)
+    if @sound
+      @game.soundSystem.play(@sound)
+
+  deselect: ->
+    @disableSound()
+
+  disableSound: ->
+    if @sound
+      @game.soundSystem.stop(@sound)
   
   createInactive: ->
-    e = @elements.mini = $('<img class="mini" src="'+@inactiveMini+'">')
+    e = @elements.mini = $('<img class="mini" src="/assets/game/tv.png">')
     e.css(
       top: @miniY+60
       left: @miniX+30

@@ -12,6 +12,13 @@ class Sound
       onfinish: =>
         @loop()
     )
+
+  play: ->
+    @isplaying = true
+    @sound.play(
+      onfinish: =>
+        @isplaying = false
+    )
   
   stop: ->
     if @isplaying
