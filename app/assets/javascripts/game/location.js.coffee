@@ -1,4 +1,4 @@
-class Localization
+class Location
   constructor: (params) ->
     @defaults()
     @elements = {}
@@ -97,4 +97,4 @@ class Localization
     )
 
 #make localization public
-window.Localization = Localization
+window.Location = Location
